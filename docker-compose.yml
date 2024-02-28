@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  db:
+    build: .
+    image: $DB_NAME
+    restart: unless-stopped
+    container_name: $DB_NAME
+    ports: 
+        - $DB_PORT:1433
+    volumes:
+        - ./volumes/var/opt/mssql/data:/var/opt/mssql/data
+        - ./volumes/var/opt/mssql/log:/var/opt/mssql/log
+        - ./volumes/var/opt/mssql/secrets:/var/opt/mssql/secrets
+    env_file:
+      - ./envs/mssql.env
